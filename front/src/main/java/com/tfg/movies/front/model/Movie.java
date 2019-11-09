@@ -1,43 +1,52 @@
-package com.tfg.movies.back.entity;
+package com.tfg.movies.front.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@ToString
 public class Movie {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+  @NotNull
   private String title;
   private byte[] data;
+  @NotNull
   private double duration;
+  @NotNull
   private String country;
+  @NotNull
   private String gender;
+  @NotNull
   private String synopsis;
+  @NotNull
   private LocalDate premiereDate;
-  @ManyToMany
-  private List<Director> directors;
-  @ManyToMany
+  @NotNull
+  private Director director;
+  @NotNull
   private List<Actor> actors;
+  @NotNull
   @Min(0)
   @Max(10)
   private double valoration;
-  @ManyToMany
+  @NotNull
   private List<Prize> prizes;
-  @OneToMany
+  @NotNull
   private List<Review> reviews;
+
+  public Movie setTitle(String title) {
+    this.title = title;
+    return this;
+  }
 
 }

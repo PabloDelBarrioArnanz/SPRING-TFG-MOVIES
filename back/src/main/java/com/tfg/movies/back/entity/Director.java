@@ -13,12 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 public class Director {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String name;
-    private Integer age;
-    @OneToMany
-    private List<Movie> movies;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
+  private String name;
+  private Integer age;
+  @ManyToMany
+  private List<Movie> movies;
 
 }

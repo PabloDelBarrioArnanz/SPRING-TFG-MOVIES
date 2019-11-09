@@ -15,12 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 public class Prize {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String name;
-    private LocalDate concessionDate;
-    @ManyToMany
-    private List<Movie> movies;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
+  private String name;
+  private LocalDate concessionDate;
+  @ManyToMany
+  private List<Movie> movies;
 
 }

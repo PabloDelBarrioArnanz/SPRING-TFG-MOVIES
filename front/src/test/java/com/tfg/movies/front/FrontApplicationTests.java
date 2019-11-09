@@ -1,10 +1,10 @@
-package com.tfg.movies.eureka;
+package com.tfg.movies.front;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaApplicationTests {
+class FrontApplicationTests {
 
   @Test
   void contextLoads() {
