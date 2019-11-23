@@ -24,13 +24,7 @@ public class MessageReceptor {
     log.info("Received deleted info " + message);
   }
 
-
-  @StreamListener(MessageStream.MOVIE_TO_READ)
-  public void receivedMovie(@Payload Message message) {
-    log.info("Received movie " + message);
-  }
-
-  @StreamListener(MessageStream.MOVIES_TO_READ)
+  @StreamListener(MessageStream.MOVIES_READY_READ)
   public void receivedMovies(@Payload List<Message> messages) {
     log.info("Received movies " + messages);
   }

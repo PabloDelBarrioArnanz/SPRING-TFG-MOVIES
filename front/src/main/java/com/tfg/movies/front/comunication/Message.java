@@ -3,7 +3,6 @@ package com.tfg.movies.front.comunication;
 import com.tfg.movies.front.model.Movie;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter

@@ -5,13 +5,13 @@ import com.tfg.movies.back.entity.Movie;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MoviesMapper {
+public class MovieMapper {
 
-  public Message toMessage(Movie movie) {
+  public static Message toMessage(Movie movie) {
     return new Message().setMovie(movie);
   }
 
-  public Movie toMovie(Message message) {
+  public static Movie toMovie(Message message) {
     return message.getMovie();
   }
 

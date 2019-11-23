@@ -20,17 +20,17 @@ public class MovieController {
 
   @GetMapping("/movie/{title}")
   public void getMovie(@PathVariable String title) {
-    messageSender.sendMessageMovieToRead(moviesMapper.toMessage(title));
+    messageSender.sendMessageMovieToRead(title);
   }
 
   @GetMapping("/all")
   public void getMovies() {
-    messageSender.sendMessageMovieToRead(moviesMapper.toMessage("all"));
+    messageSender.sendMessageMoviesToRead();
   }
 
   @DeleteMapping("/movie/{title}")
   public void deleteMovie(@PathVariable String title) {
-    messageSender.sendMessageMoviesToDelete(moviesMapper.toMessage(title));
+    messageSender.sendMessageMoviesToDelete(title);
   }
 
 }

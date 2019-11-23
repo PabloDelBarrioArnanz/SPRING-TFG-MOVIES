@@ -19,28 +19,28 @@ public interface MessageStream {
 
 
   @Output(MOVIE_SAVED)
-  SubscribableChannel inboundSaved();
+  SubscribableChannel outboundSaved();
 
   @Output(MOVIE_DELETED)
-  SubscribableChannel inboundDeleted();
+  SubscribableChannel outboundDeleted();
 
   @Output(MOVIE_READY_READ)
-  SubscribableChannel inboundRead();
+  SubscribableChannel outboundRead();
 
   @Output(MOVIES_READY_READ)
-  SubscribableChannel inboundsRead();
+  SubscribableChannel outboundsRead();
 
 
   @Input(MOVIE_TO_SAVE)
-  MessageChannel outboundToSave();
+  MessageChannel inboundToSave();
 
   @Input(MOVIE_TO_DELETE)
-  MessageChannel outboundToDelete();
+  MessageChannel inboundToDelete();
 
   @Input(MOVIE_TO_READ)
-  MessageChannel outboundToRead();
+  MessageChannel inboundToRead();
 
   @Input(MOVIES_TO_READ)
-  MessageChannel outboundsToRead();
+  MessageChannel inboundsToRead();
 
 }

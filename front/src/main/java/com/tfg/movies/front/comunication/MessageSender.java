@@ -17,25 +17,25 @@ public class MessageSender {
     sendMessage(messageStream.outboundToSave(), message);
   }
 
-  public void sendMessageMovieToRead(Message message) {
-    log.info("Sending a tittle to read the movie " + message);
-    sendMessage(messageStream.outboundToRead(), message);
+  public void sendMessageMovieToRead(String tittle) {
+    log.info("Sending a tittle to read the movie " + tittle);
+    sendMessage(messageStream.outboundToRead(), tittle);
   }
 
-  public void sendMessageMoviesToRead(Message message) {
-    log.info("Sending a request to read all movies " + message);
-    sendMessage(messageStream.outboundsToRead(), message);
+  public void sendMessageMoviesToRead() {
+    log.info("Sending a request to read all movies");
+    sendMessage(messageStream.outboundsToRead(), "");
   }
 
-  public void sendMessageMoviesToDelete(Message message) {
-    log.info("Sending a tittle to delete movie " + message);
-    sendMessage(messageStream.outboundToDelete(), message);
+  public void sendMessageMoviesToDelete(String tittle) {
+    log.info("Sending a tittle to delete movie " + tittle);
+    sendMessage(messageStream.outboundToDelete(), tittle);
   }
 
-  private void sendMessage(MessageChannel channel, Message message) {
+  private <T> void sendMessage(MessageChannel channel, T payload) {
     channel
       .send(MessageBuilder
-        .withPayload(message)
+        .withPayload(payload)
         .build());
   }
 
