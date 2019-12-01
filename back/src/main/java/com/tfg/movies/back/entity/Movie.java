@@ -6,10 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,23 +20,53 @@ public class Movie {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+
   private String title;
+
   private byte[] data;
+
   private double duration;
+
   private String country;
+
   private String gender;
+
   private String synopsis;
+
   private LocalDate premiereDate;
-  @ManyToMany
-  private List<Director> directors;
-  @ManyToMany
-  private List<Actor> actors;
-  @Min(0)
-  @Max(10)
-  private double valoration;
-  @ManyToMany
-  private List<Prize> prizes;
-  @OneToMany
-  private List<Review> reviews;
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(
+    name = "Movie_Director",
+    joinColumns = { @JoinColumn(name = "movie_id") },
+    inverseJoinColumns = { @JoinColumn(name = "director_id") }
+  )
+  private Set<Director> directors = new HashSet<>();
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(
+    name = "Movie_Actor",
+    joinColumns = { @JoinColumn(name = "movie_id") },
+    inverseJoinColumns = { @JoinColumn(name = "actor_id") }
+  )
+  private Set<Actor> actors = new HashSet<>();
+
+  private double score;
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(
+    name = "Movie_Prize",
+    joinColumns = { @JoinColumn(name = "movie_id") },
+    inverseJoinColumns = { @JoinColumn(name = "prize_id") }
+  )
+  private Set<Prize> prizes = new HashSet<>();
+
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(
+    name = "Movie_Review",
+    joinColumns = { @JoinColumn(name = "movie_id") },
+    inverseJoinColumns = { @JoinColumn(name = "review_id") }
+  )
+  private Set<Review> reviews = new HashSet<>();
 
 }

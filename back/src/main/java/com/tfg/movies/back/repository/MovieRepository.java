@@ -11,6 +11,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
   List<Movie> findByTitle(String title);
 
-  boolean deleteByTitle(String title);
+  Integer deleteByTitle(String title);
 
 }

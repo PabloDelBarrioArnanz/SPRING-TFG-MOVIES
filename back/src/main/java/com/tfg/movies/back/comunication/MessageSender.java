@@ -1,8 +1,6 @@
 package com.tfg.movies.back.comunication;
 
-import com.tfg.movies.back.entity.Movie;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -14,12 +12,11 @@ import java.util.List;
 @Component
 public class MessageSender {
 
-  @Autowired
-  private MessageStream messageStream;
+  @Autowired private MessageStream messageStream;
 
-  public void sendMessageMovieSaved(Boolean status) {
-    log.info("Saving movie process status :: " + status);
-    sendMessage(messageStream.outboundSaved(), status);
+  public void sendMessageMovieSaved(Message message) {
+    log.info("Saving movie :: " + message);
+    sendMessage(messageStream.outboundSaved(), message);
   }
 
   public void sendMessageMoviesRead(List<Message> messages) {
@@ -28,13 +25,13 @@ public class MessageSender {
   }
 
   public void sendMessageMoviesReadByTitle(List<Message> messages) {
-    log.info("Reading movies by title");
+    log.info("Reading movies by title " + messages);
     sendMessage(messageStream.outboundsRead(), messages);
   }
 
-  public void sendMessageMovieDeleted(Boolean status) {
-    log.info("Deleting movie process status :: " + status);
-    sendMessage(messageStream.outboundSaved(), status);
+  public void sendMessageMovieDeleted(Boolean result) {
+    log.info("Deleting movie :: " + result);
+    sendMessage(messageStream.outboundSaved(), result);
   }
 
   private <T> void sendMessage(MessageChannel channel, T payload) {

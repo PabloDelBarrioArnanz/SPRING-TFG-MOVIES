@@ -1,36 +1,37 @@
 package com.tfg.movies.front.controller;
 
-import com.tfg.movies.front.comunication.MessageSender;
-import com.tfg.movies.front.mapper.MoviesMapper;
 import com.tfg.movies.front.model.Movie;
+import com.tfg.movies.front.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
+@RequestMapping("${base.url}" + "/movie")
 public class MovieController {
 
-  @Autowired private MessageSender messageSender;
-  @Autowired private MoviesMapper moviesMapper;
+  @Autowired private MovieService movieService;
 
   @PostMapping
-  public void createMovie(@RequestBody Movie movie) {
-    messageSender.sendMessageMovieToSave(moviesMapper.toMessage(movie));
+  public void createMovie(@Valid @RequestBody Movie movie) {
+    movieService.createMovie(movie);
   }
 
-  @GetMapping("/movie/{title}")
+  @GetMapping("{title}")
   public void getMovie(@PathVariable String title) {
-    messageSender.sendMessageMovieToRead(title);
+    movieService.getMovie(title);
   }
 
-  @GetMapping("/all")
+  @GetMapping
   public void getMovies() {
-    messageSender.sendMessageMoviesToRead();
+    movieService.getMovies();
   }
 
-  @DeleteMapping("/movie/{title}")
+  @DeleteMapping("{title}")
   public void deleteMovie(@PathVariable String title) {
-    messageSender.sendMessageMoviesToDelete(title);
+    movieService.deleteMovie(title);
   }
 
 }

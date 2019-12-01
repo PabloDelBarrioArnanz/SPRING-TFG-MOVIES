@@ -1,6 +1,5 @@
 package com.tfg.movies.back.comunication;
 
-import com.tfg.movies.back.mapper.MovieMapper;
 import com.tfg.movies.back.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageReceptor {
 
-  @Autowired private MessageStream messageStream;
-  @Autowired private MovieMapper mapper;
   @Autowired private MovieService movieService;
-
 
   @StreamListener(MessageStream.MOVIE_TO_SAVE)
   public void movieToSave(@Payload Message message) {
     log.info("Received a message: movie to save " + message);
-    movieService.saveMovie(mapper.toMovie(message));
+    movieService.saveMovie(message);
   }
 
   @StreamListener(MessageStream.MOVIE_TO_READ)
@@ -35,9 +31,9 @@ public class MessageReceptor {
     movieService.readAllMovies();
   }
 
-  @StreamListener(MessageStream.MOVIE_DELETED)
+  @StreamListener(MessageStream.MOVIE_TO_DELETE)
   public void movieToDelete(@Payload String title) {
-    log.info("Received a message: movie to read " + title);
+    log.info("Received a message: movie to delete " + title);
     movieService.deleteMovieByTitle(title);
   }
 

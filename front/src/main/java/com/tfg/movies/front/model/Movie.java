@@ -1,13 +1,15 @@
 package com.tfg.movies.front.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,33 +17,50 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
+@Entity
 public class Movie {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
-  @NotNull
+
+  @NotEmpty
   private String title;
+
   private byte[] data;
-  @NotNull
+
+  @Min(1)
+  @Max(500)
   private double duration;
-  @NotNull
+
+  @NotEmpty
   private String country;
-  @NotNull
+
+  @NotEmpty
   private String gender;
-  @NotNull
+
+  @NotEmpty
   private String synopsis;
-  @NotNull
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate premiereDate;
-  @NotNull
-  private Director director;
-  @NotNull
+
+  @NotEmpty
+  @ElementCollection
+  private List<Director> director;
+
+  @NotEmpty
+  @ElementCollection
   private List<Actor> actors;
-  @NotNull
+
   @Min(0)
-  @Max(10)
-  private double valoration;
-  @NotNull
+  @Max(100)
+  private double score;
+
+  @ElementCollection
   private List<Prize> prizes;
-  @NotNull
+
+  @ElementCollection
   private List<Review> reviews;
 
   public Movie setTitle(String title) {

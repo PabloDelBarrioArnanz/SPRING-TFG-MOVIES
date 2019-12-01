@@ -3,13 +3,16 @@ package com.tfg.movies.back.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Actor {
 
@@ -19,7 +22,7 @@ public class Actor {
   private String name;
   private String rol;
   private Integer age;
-  @ManyToMany
-  private List<Movie> movies;
+  @ManyToMany(mappedBy = "actors")
+  private Set<Movie> movies = new HashSet<>();
 
 }

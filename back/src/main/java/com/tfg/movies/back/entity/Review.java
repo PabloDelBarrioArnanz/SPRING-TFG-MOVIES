@@ -19,7 +19,11 @@ public class Review {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+
   private String reviewer;
+
+  private String review;
+
   private LocalDate reviewDate;
 
 }
