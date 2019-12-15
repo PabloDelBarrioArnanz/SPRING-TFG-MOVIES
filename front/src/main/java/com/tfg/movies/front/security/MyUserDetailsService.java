@@ -4,7 +4,6 @@ import com.tfg.movies.front.model.Role;
 import com.tfg.movies.front.repository.RoleRepository;
 import com.tfg.movies.front.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.integration.core.MessageSource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
