@@ -1,0 +1,23 @@
+package com.tfg.movies.front.controller;
+
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MyErrorController implements ErrorController {
+
+  private static final String PATH = "/error";
+
+  @RequestMapping(value = PATH)
+  public String error(Model model) {
+    return "error";
+  }
+
+  @Override
+  public String getErrorPath() {
+    return PATH;
+  }
+
+}

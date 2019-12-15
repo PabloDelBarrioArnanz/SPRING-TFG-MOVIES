@@ -3,18 +3,20 @@ package com.tfg.movies.front.controller;
 import com.tfg.movies.front.model.Movie;
 import com.tfg.movies.front.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("${base.url}" + "/movie")
+@RequestMapping("${base.url}")
 public class MovieController {
 
-  @Autowired private MovieService movieService;
+  @Autowired
+  private MovieService movieService;
 
-  @PostMapping
+  @PostMapping("/movie")
   public void createMovie(@Valid @RequestBody Movie movie) {
     movieService.createMovie(movie);
   }
@@ -24,9 +26,11 @@ public class MovieController {
     movieService.getMovie(title);
   }
 
-  @GetMapping
-  public void getMovies() {
+  @GetMapping("/")
+  public String getMovies(Model model) {
     movieService.getMovies();
+    model.addAttribute("mensaje", "hola que tal?");
+    return "home";
   }
 
   @DeleteMapping("{title}")
