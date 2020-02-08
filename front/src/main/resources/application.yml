@@ -14,14 +14,22 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
+  thymeleaf:
+    cache: false
+    prefix: src/main/resources/templates/
+    template-resolver-order: 0
 
 server:
   port: 8082
+  error:
+    whitelabel:
+      enabled: false
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8080/eureka/
 
-base:
-  url: /api/movie-finder
+controller:
+  movie:
+    endpoint: /api/movie-finder

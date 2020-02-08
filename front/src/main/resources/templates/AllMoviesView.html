@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Movies</title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link href="../static/images/fav-icon.png" rel="icon" th:href="@{/images/fav-icon.png}" type="image/x-icon"/>
+</head>
+
+<body class="card-body">
+    <div class="flex-row">
+        <p class="p-0">Movies</p>
+    </div>
+    <div class="container-fluid">
+        <table class="table-borderless">
+            <thead>
+            </thead>
+            <tbody>
+            <tr th:each="Pelicula: ${movie}">
+                <td th:text=${Pelicula.title}></td>
+                <td th:text=${Pelicula.synopsis}></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+</body>
+
+</html>
