@@ -5,33 +5,32 @@
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Movies</title>
+    <title>Create Movie</title>
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <link href="../static/images/fav-icon.png" rel="icon" th:href="@{/images/fav-icon.png}" type="image/x-icon"/>
 </head>
 
 <body class="card-body">
     <div class="card-title">
-        <h1 class="h1">Movies</h1>
+        <h1 class="h1">Create Movie</h1>
     </div>
     <div class="container-fluid">
-        <table class="table-borderless">
-            <thead>
-            </thead>
-                <thead class="h2">Tittle</thead>
-                <thead class="h2">Synopsis</thead>
-                <thead class="h2">Director</thead>
-            <tbody>
-                <tr th:each="Pelicula: ${movie}">
-                    <td class="h4" th:text=${Pelicula.title}></td>
-                    <td class="h4" th:text=${Pelicula.synopsis}></td>
-                </tr>
-            </tbody>
-        </table>
+        <form action="#" method="post" th:action="@{/api/movie-finder/create}" th:object="${Movie}">
+            <label>Title</label>
+            <input id="Title" th:field="*{tittle}" type="text"></br>
+            <label>Director</label>
+            <input id="Director" th:field="*{director}" type="text"></br>
+            <label>Synopsis</label>
+            <input id="Synopsis" th:field="*{synopsis}" type="text"></br>
+            <label>Gender</label>
+            <input id="Gender" th:field="*{gender}" type="text"></br>
+            <input type="submit" value="Sub mit"/>
+            <input type="reset" value="Reset"/>
+        </form>
     </div>
     <div class="card-body">
         <button class="button-bar">
-            <a href="#" th:href="@{/api/movie-finder/create/movie}">Create movie</a>
+            <a href="#" th:href="@{/api/movie-finder/all}">Home Page</a>
         </button>
     </div>
     <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>

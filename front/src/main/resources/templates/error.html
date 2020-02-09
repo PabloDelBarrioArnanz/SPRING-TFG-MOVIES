@@ -5,14 +5,18 @@
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Error</title>
+    <title>Error - Page Not Found</title>
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 
 <body class="align-content-center">
     <div class="card-body">
-        <img th:src="@{/images/error404.jpg}"/>
-        <a class="btn-link" href="#" th:href="@{/api/movie-finder/all}">Home Page</a>
+        <img alt="error img" height="40%" th:src="@{/images/error404.jpg}" width="40%"/>
+    </div>
+    <div class="card-body">
+        <button class="button-bar">
+            <a href="#" th:href="@{/api/movie-finder/all}">Home Page</a>
+        </button>
     </div>
 </body>
 
