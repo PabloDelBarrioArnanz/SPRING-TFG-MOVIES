@@ -3,10 +3,8 @@ package com.tfg.movies.front.controller;
 import com.tfg.movies.front.model.Movie;
 import com.tfg.movies.front.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,12 +30,8 @@ public class MovieController {
 
   @GetMapping("/all")
   @PreAuthorize("hasRole('ROLE_VISITOR') OR hasRole('ROLE_ADMIN')")
-  public String getMovies(Model model) {
-    //movieService.getMovies();
-    Movie movie = new Movie();
-    movie.setTitle("Titulo1");
-    movie.setSynopsis("Sinopsis1");
-    model.addAttribute("movie", movie);
+  public String getMovies() {
+    movieService.getMovies();
     return "AllMoviesView";
   }
 
