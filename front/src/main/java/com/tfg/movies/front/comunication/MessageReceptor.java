@@ -27,5 +27,4 @@ public class MessageReceptor {
   public void receivedMovies(@Payload List<Message> messages) {
     runAsync(() -> log.info("Received movies " + messages));
   }
-
 }
