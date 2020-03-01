@@ -1,7 +1,7 @@
 package com.tfg.movies.front.security;
 
-import com.tfg.movies.front.model.Role;
-import com.tfg.movies.front.model.User;
+import com.tfg.movies.front.model.entity.Role;
+import com.tfg.movies.front.model.entity.User;
 import com.tfg.movies.front.repository.RoleRepository;
 import com.tfg.movies.front.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

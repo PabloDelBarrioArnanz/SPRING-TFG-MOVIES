@@ -14,10 +14,6 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
-  thymeleaf:
-    cache: false
-    prefix: src/main/resources/templates/
-    template-resolver-order: 0
 
 server:
   port: 8082

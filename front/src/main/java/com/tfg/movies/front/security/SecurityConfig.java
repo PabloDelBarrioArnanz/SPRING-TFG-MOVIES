@@ -20,10 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable()
       .authorizeRequests()
       .anyRequest()
-      .authenticated()
-      .and()
-      .formLogin()
-      .successHandler((request, response, authentication) -> redirectStrategy.sendRedirect(request, response, "/api/movie-finder/all"));
+      .permitAll();
+    //.authenticated()
+    //.and()
+    //.formLogin()
+    //.successHandler((request, response, authentication) -> redirectStrategy.sendRedirect(request, response, "/api/movie-finder/all"));
   }
 
   @Bean

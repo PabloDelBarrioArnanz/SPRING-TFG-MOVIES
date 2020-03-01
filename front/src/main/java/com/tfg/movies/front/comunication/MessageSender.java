@@ -1,7 +1,7 @@
 package com.tfg.movies.front.comunication;
 
 import com.tfg.movies.front.mapper.MoviesMapper;
-import com.tfg.movies.front.model.Movie;
+import com.tfg.movies.front.model.entity.Movie;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessageChannel;

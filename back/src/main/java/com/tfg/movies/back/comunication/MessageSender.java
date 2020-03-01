@@ -6,13 +6,15 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Slf4j
 @Component
 public class MessageSender {
 
-  @Autowired private MessageStream messageStream;
+  @Autowired
+  private MessageStream messageStream;
 
   public void sendMessageMovieSaved(Message message) {
     log.info("Saving movie :: " + message);
@@ -34,11 +36,11 @@ public class MessageSender {
     sendMessage(messageStream.outboundSaved(), result);
   }
 
-  private <T> void sendMessage(MessageChannel channel, T payload) {
-    channel
-      .send(MessageBuilder
-        .withPayload(payload)
-        .build());
+  @Transactional
+  public <T> void sendMessage(MessageChannel channel, T payload) {
+    channel.send(MessageBuilder
+      .withPayload(payload)
+      .build());
   }
 
 }

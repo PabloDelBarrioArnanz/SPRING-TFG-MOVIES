@@ -1,7 +1,7 @@
 package com.tfg.movies.front.service;
 
 import com.tfg.movies.front.comunication.MessageSender;
-import com.tfg.movies.front.model.Movie;
+import com.tfg.movies.front.model.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

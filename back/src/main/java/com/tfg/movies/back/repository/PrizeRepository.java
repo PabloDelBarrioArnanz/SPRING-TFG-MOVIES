@@ -1,6 +1,6 @@
 package com.tfg.movies.back.repository;
 
-import com.tfg.movies.back.entity.Prize;
+import com.tfg.movies.back.model.entity.Prize;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
