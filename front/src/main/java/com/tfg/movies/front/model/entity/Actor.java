@@ -37,4 +37,8 @@ public class Actor {
   @ElementCollection
   private List<Movie> movies;
 
+  public Actor setName(String name) {
+    this.name = name;
+    return this;
+  }
 }

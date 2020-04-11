@@ -8,11 +8,8 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
-
   List<Movie> findAll();
-
   List<Movie> findByTitle(String title);
-
-  Integer deleteByTitle(String title);
-
+  void deleteById(Integer id);
+  void delete(Movie movie);
 }

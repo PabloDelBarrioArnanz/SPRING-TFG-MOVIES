@@ -1,11 +1,11 @@
-package com.tfg.movies.back.comunication;
+package com.tfg.movies.back.comunication.movie;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface MessageStream {
+public interface MessageMovieStream {
 
   String MOVIE_SAVED = "MOVIE_SAVED";
   String MOVIE_DELETED = "MOVIE_DELETED";

@@ -1,4 +1,4 @@
-package com.tfg.movies.back.comunication;
+package com.tfg.movies.back.comunication.movie;
 
 import com.tfg.movies.back.model.dto.MovieDTO;
 import com.tfg.movies.back.model.entity.Movie;
@@ -9,17 +9,17 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public class Message {
+public class MovieMessage {
 
   private Movie movie;
   private MovieDTO movieDTO;
 
-  public Message withMovie(Movie movie) {
+  public MovieMessage withMovie(Movie movie) {
     this.movie = movie;
     return this;
   }
 
-  public Message withMovieDTO(MovieDTO movieDTO) {
+  public MovieMessage withMovieDTO(MovieDTO movieDTO) {
     this.movieDTO = movieDTO;
     return this;
   }

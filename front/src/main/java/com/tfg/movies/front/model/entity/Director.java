@@ -29,4 +29,8 @@ public class Director {
   @ElementCollection
   private List<Movie> movies;
 
+  public Director setName(String name) {
+    this.name = name;
+    return this;
+  }
 }
