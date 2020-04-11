@@ -9,20 +9,20 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
-public class MessageActorReceptor {
+public class ActorReceptor {
 
-  @StreamListener(MessageActorStream.ACTOR_SAVED)
+  @StreamListener(ActorStream.SAVE_ACTOR_RESPONSE)
   public void savedActor(@Payload ActorMessage actorMessage) {
-    runAsync(() -> log.info("Received saved info " + actorMessage));
+    runAsync(() -> log.info("Actor save response :: " + actorMessage.getActorDTO()));
   }
 
-  @StreamListener(MessageActorStream.ACTOR_DELETED)
+  @StreamListener(ActorStream.DELETE_ACTOR_RESPONSE)
   public void deletedActor(@Payload Boolean status) {
-    runAsync(() -> log.info("Received deleted info " + status));
+    runAsync(() -> log.info("Actor deleted response :: " + status));
   }
 
-  @StreamListener(MessageActorStream.ACTOR_READY_READ)
+  @StreamListener(ActorStream.READ_ACTOR_RESPONSE)
   public void receivedActor(@Payload ActorMessage actorMessage) {
-    runAsync(() -> log.info("Received actor " + actorMessage));
+    runAsync(() -> log.info("Movie read request info :: " + actorMessage.getActorDTO()));
   }
 }

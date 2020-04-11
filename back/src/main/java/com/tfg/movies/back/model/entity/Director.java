@@ -3,6 +3,7 @@ package com.tfg.movies.back.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,12 +13,11 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Director {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
-
+  @Column(nullable = false)
   private String name;
 
   private Integer age;

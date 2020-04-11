@@ -1,10 +1,12 @@
 package com.tfg.movies.back.model.dto;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
+@ToString
 public class ReviewDTO {
 
   private String reviewer;

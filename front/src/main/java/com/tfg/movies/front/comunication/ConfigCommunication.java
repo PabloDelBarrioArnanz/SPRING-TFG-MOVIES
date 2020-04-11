@@ -1,11 +1,11 @@
 package com.tfg.movies.front.comunication;
 
-import com.tfg.movies.front.comunication.actor.MessageActorStream;
-import com.tfg.movies.front.comunication.director.MessageDirectorStream;
-import com.tfg.movies.front.comunication.error.MessageErrorStream;
-import com.tfg.movies.front.comunication.movie.MessageMovieStream;
+import com.tfg.movies.front.comunication.actor.ActorStream;
+import com.tfg.movies.front.comunication.director.DirectorStream;
+import com.tfg.movies.front.comunication.error.ErrorStream;
+import com.tfg.movies.front.comunication.movie.MovieStream;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
-@EnableBinding({MessageMovieStream.class, MessageActorStream.class, MessageErrorStream.class, MessageDirectorStream.class})
+@EnableBinding({MovieStream.class, ActorStream.class, ErrorStream.class, DirectorStream.class})
 public class ConfigCommunication {
 }

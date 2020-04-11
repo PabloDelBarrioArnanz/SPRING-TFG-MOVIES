@@ -11,31 +11,31 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
-public class MessageActorReceptor {
+public class ActorReceptor {
 
   @Autowired private ActorService actorService;
 
-  @StreamListener(MessageActorStream.ACTOR_TO_SAVE)
+  @StreamListener(ActorStream.SAVE_ACTOR_REQUEST)
   public void actorToSave(@Payload ActorMessage actorMessage) {
-    runAsync(() -> log.info("Received a message to save a actor " + actorMessage))
+    runAsync(() -> log.info("Received an actor for save :: " + actorMessage.getActorDTO()))
       .thenRunAsync(() -> actorService.saveActor(actorMessage));
   }
 
-  @StreamListener(MessageActorStream.ACTOR_TO_READ)
+  @StreamListener(ActorStream.READ_ACTOR_REQUEST)
   public void actorToRead(@Payload String name) {
-    runAsync(() -> log.info("Received a message: actor to read " + name))
-      .thenRunAsync(() -> actorService.readActorsByName(name));
+    runAsync(() -> log.info("Received a name to read an actor :: " + name))
+      .thenRunAsync(() -> actorService.readActorByName(name));
   }
 
-  @StreamListener(MessageActorStream.ACTORS_TO_READ)
+  @StreamListener(ActorStream.READ_ALL_ACTORS_REQUEST)
   public void actorsToRead() {
-    runAsync(() -> log.info("Received a message: read all actors"))
+    runAsync(() -> log.info("Received a request to read :: all actors"))
       .thenRunAsync(() -> actorService.readAllActors());
   }
 
-  @StreamListener(MessageActorStream.ACTOR_TO_DELETE)
+  @StreamListener(ActorStream.DELETE_ACTOR_REQUEST)
   public void actorToDelete(@Payload String name) {
-    runAsync(() -> log.info("Received a message: actor to delete " + name))
+    runAsync(() -> log.info("Received a name to delete an actor :: " + name))
       .thenRunAsync(() -> actorService.deleteActorByName(name));
   }
 

@@ -9,20 +9,20 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
-public class MessageDirectorReceptor {
+public class DirectorReceptor {
 
-  @StreamListener(MessageDirectorStream.DIRECTOR_SAVED)
+  @StreamListener(DirectorStream.SAVE_DIRECTOR_RESPONSE)
   public void savedActor(@Payload DirectorMessage directorMessage) {
-    runAsync(() -> log.info("Received saved info " + directorMessage));
+    runAsync(() -> log.info("Director save response :: "  + directorMessage.getDirectorDTO()));
   }
 
-  @StreamListener(MessageDirectorStream.DIRECTOR_DELETED)
+  @StreamListener(DirectorStream.DELETE_DIRECTOR_RESPONSE)
   public void deletedActor(@Payload Boolean status) {
-    runAsync(() -> log.info("Received deleted info " + status));
+    runAsync(() -> log.info("Director deleted response :: " + status));
   }
 
-  @StreamListener(MessageDirectorStream.DIRECTOR_READY_READ)
+  @StreamListener(DirectorStream.READ_DIRECTOR_RESPONSE)
   public void receivedActor(@Payload DirectorMessage directorMessage) {
-    runAsync(() -> log.info("Received director " + directorMessage));
+    runAsync(() -> log.info("Director read request info :: " + directorMessage.getDirectorDTO()));
   }
 }

@@ -11,31 +11,31 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
-public class MessageMovieReceptor {
+public class MovieReceptor {
 
   @Autowired private MovieService movieService;
 
-  @StreamListener(MessageMovieStream.MOVIE_TO_SAVE)
+  @StreamListener(MovieStream.SAVE_MOVIE_REQUEST)
   public void movieToSave(@Payload MovieMessage movieMessage) {
-    runAsync(() -> log.info("Received a message to save a movie " + movieMessage))
+    runAsync(() -> log.info("Received a movie for save :: " + movieMessage.getMovie()))
       .thenRunAsync(() -> movieService.saveMovie(movieMessage));
   }
 
-  @StreamListener(MessageMovieStream.MOVIE_TO_READ)
+  @StreamListener(MovieStream.READ_MOVIE_REQUEST)
   public void movieToRead(@Payload String title) {
-    runAsync(() -> log.info("Received a message: movie to read " + title))
-      .thenRunAsync(() -> movieService.readMoviesByTitle(title));
+    runAsync(() -> log.info("Received a title to read a movie :: " + title))
+      .thenRunAsync(() -> movieService.readMovieByTitle(title));
   }
 
-  @StreamListener(MessageMovieStream.MOVIES_TO_READ)
+  @StreamListener(MovieStream.READ_ALL_MOVIES_REQUEST)
   public void moviesToRead() {
-    runAsync(() -> log.info("Received a message: read all movies"))
+    runAsync(() -> log.info("Received a request to read :: all movies"))
       .thenRunAsync(() -> movieService.readAllMovies());
   }
 
-  @StreamListener(MessageMovieStream.MOVIE_TO_DELETE)
+  @StreamListener(MovieStream.DELETE_MOVIE_REQUEST)
   public void movieToDelete(@Payload String title) {
-    runAsync(() -> log.info("Received a message: movie to delete " + title))
+    runAsync(() -> log.info("Received a title to delete a movie :: " + title))
       .thenRunAsync(() -> movieService.deleteMovieByTitle(title));
   }
 

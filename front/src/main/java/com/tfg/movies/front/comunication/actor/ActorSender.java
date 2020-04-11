@@ -13,31 +13,31 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class MessageActorSender {
+public class ActorSender {
 
-  @Autowired private MessageActorStream messageActorStream;
+  @Autowired private ActorStream actorStream;
   @Autowired private ActorMapper actorMapper;
 
   public void sendMessageActorToSave(@Validated Actor actor) {
-    log.info("Sending a actor to be saved " + actor);
+    log.info("Sending an actor for save :: " + actor);
     Optional.of(actor)
       .map(mov -> actorMapper.toActorMessage(mov))
-      .ifPresent(message -> sendMessage(messageActorStream.sendRequestToSaveActor(), message));
+      .ifPresent(message -> sendMessage(actorStream.sendRequestToSaveActor(), message));
   }
 
   public void sendMessageActorToRead(String title) {
-    log.info("Sending a name to read the actor " + title);
-    sendMessage(messageActorStream.sendRequestToReadActor(), title);
+    log.info("Sending a name to read the actor :: " + title);
+    sendMessage(actorStream.sendRequestToReadActor(), title);
   }
 
   public void sendMessageActorsToRead() {
-    log.info("Sending a request to read all actor");
-    sendMessage(messageActorStream.sendRequestToReadAllActors(), "");
+    log.info("Sending a request to read :: all actors");
+    sendMessage(actorStream.sendRequestToReadAllActors(), "");
   }
 
   public void sendMessageActorsToDelete(String title) {
-    log.info("Sending a name to delete actor " + title);
-    sendMessage(messageActorStream.sendRequestToDeleteActor(), title);
+    log.info("Sending a name to delete actor :: " + title);
+    sendMessage(actorStream.sendRequestToDeleteActor(), title);
   }
 
   private <T> void sendMessage(MessageChannel channel, T payload) {

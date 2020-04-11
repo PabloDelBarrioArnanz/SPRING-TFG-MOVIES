@@ -13,31 +13,31 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class MessageMovieSender {
+public class MovieSender {
 
-  @Autowired private MessageMovieStream messageMovieStream;
+  @Autowired private MovieStream movieStream;
   @Autowired private MovieMapper movieMapper;
 
   public void sendMessageMovieToSave(@Validated Movie movie) {
-    log.info("Sending a movie to be saved " + movie);
+    log.info("Sending a movie for save :: " + movie);
     Optional.of(movie)
       .map(mov -> movieMapper.toMovieMessage(mov))
-      .ifPresent(message -> sendMessage(messageMovieStream.sendRequestToSaveMovie(), message));
+      .ifPresent(message -> sendMessage(movieStream.sendRequestToSaveMovie(), message));
   }
 
   public void sendMessageMovieToRead(String title) {
-    log.info("Sending a tittle to read the movie " + title);
-    sendMessage(messageMovieStream.sendRequestToReadMovie(), title);
+    log.info("Sending a title to read the movie :: " + title);
+    sendMessage(movieStream.sendRequestToReadMovie(), title);
   }
 
   public void sendMessageMoviesToRead() {
-    log.info("Sending a request to read all movies");
-    sendMessage(messageMovieStream.sendRequestToSaveAllMovies(), "");
+    log.info("Sending a request to read :: all movies");
+    sendMessage(movieStream.sendRequestToSaveAllMovies(), "");
   }
 
   public void sendMessageMoviesToDelete(String title) {
-    log.info("Sending a tittle to delete movie " + title);
-    sendMessage(messageMovieStream.sendRequestToDeleteMovie(), title);
+    log.info("Sending a title to delete movie :: " + title);
+    sendMessage(movieStream.sendRequestToDeleteMovie(), title);
   }
 
   private <T> void sendMessage(MessageChannel channel, T payload) {

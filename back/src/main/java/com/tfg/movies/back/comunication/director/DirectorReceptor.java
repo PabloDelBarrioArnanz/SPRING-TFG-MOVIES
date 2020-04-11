@@ -11,31 +11,31 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
-public class MessageDirectorReceptor {
+public class DirectorReceptor {
 
   @Autowired private DirectorService directorService;
 
-  @StreamListener(MessageDirectorStream.DIRECTOR_TO_SAVE)
+  @StreamListener(DirectorStream.SAVE_DIRECTOR_REQUEST)
   public void directorToSave(@Payload DirectorMessage directorMessage) {
-    runAsync(() -> log.info("Received a message to save a director " + directorMessage))
+    runAsync(() -> log.info("Received a director for save :: " + directorMessage.getDirectorDTO()))
       .thenRunAsync(() -> directorService.saveDirector(directorMessage));
   }
 
-  @StreamListener(MessageDirectorStream.DIRECTOR_TO_READ)
+  @StreamListener(DirectorStream.READ_DIRECTOR_REQUEST)
   public void directorToRead(@Payload String name) {
-    runAsync(() -> log.info("Received a message: director to read " + name))
-      .thenRunAsync(() -> directorService.readDirectorsByName(name));
+    runAsync(() -> log.info("Received a name to read a director :: " + name))
+      .thenRunAsync(() -> directorService.readDirectorByName(name));
   }
 
-  @StreamListener(MessageDirectorStream.DIRECTORS_TO_READ)
+  @StreamListener(DirectorStream.READ_ALL_DIRECTORS_REQUEST)
   public void directorsToRead() {
-    runAsync(() -> log.info("Received a message: read all directors"))
+    runAsync(() -> log.info("Received a request to read :: all directors"))
       .thenRunAsync(() -> directorService.readAllDirectors());
   }
 
-  @StreamListener(MessageDirectorStream.DIRECTOR_TO_DELETE)
+  @StreamListener(DirectorStream.DELETE_DIRECTOR_REQUEST)
   public void directorToDelete(@Payload String name) {
-    runAsync(() -> log.info("Received a message: director to delete " + name))
+    runAsync(() -> log.info("Received a name to delete a director :: " + name))
       .thenRunAsync(() -> directorService.deleteDirectorByName(name));
   }
 

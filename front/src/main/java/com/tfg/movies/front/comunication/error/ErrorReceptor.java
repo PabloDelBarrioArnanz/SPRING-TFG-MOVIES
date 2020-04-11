@@ -9,9 +9,9 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
-public class MessageErrorReceptor {
+public class ErrorReceptor {
 
-  @StreamListener(MessageErrorStream.ERROR_RESPONSE)
+  @StreamListener(ErrorStream.ERROR_RESPONSE)
   public void savedActor(@Payload ErrorMessage errorMessage) {
     runAsync(() -> log.error(errorMessage.getError()));
   }

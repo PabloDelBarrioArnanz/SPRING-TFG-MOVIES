@@ -13,31 +13,31 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class MessageDirectorSender {
+public class DirectorSender {
 
-  @Autowired private MessageDirectorStream messageDirectorStream;
+  @Autowired private DirectorStream directorStream;
   @Autowired private DirectorMapper directorMapper;
 
   public void sendMessageDirectorToSave(@Validated Director director) {
-    log.info("Sending a director to be saved " + director);
+    log.info("Sending a director for save :: " + director);
     Optional.of(director)
       .map(mov -> directorMapper.toDirectorMessage(mov))
-      .ifPresent(message -> sendMessage(messageDirectorStream.sendRequestToSaveDirector(), message));
+      .ifPresent(message -> sendMessage(directorStream.sendRequestToSaveDirector(), message));
   }
 
-  public void sendMessageDirectorToRead(String title) {
-    log.info("Sending a name to read the director " + title);
-    sendMessage(messageDirectorStream.sendRequestToReadDirector(), title);
+  public void sendMessageDirectorToRead(String name) {
+    log.info("Sending a name to read the director :: " + name);
+    sendMessage(directorStream.sendRequestToReadDirector(), name);
   }
 
   public void sendMessageDirectorsToRead() {
-    log.info("Sending a request to read all director");
-    sendMessage(messageDirectorStream.sendRequestToReadAllDirectors(), "");
+    log.info("Sending a request to read :: all directors");
+    sendMessage(directorStream.sendRequestToReadAllDirectors(), "");
   }
 
-  public void sendMessageDirectorsToDelete(String title) {
-    log.info("Sending a name to delete director " + title);
-    sendMessage(messageDirectorStream.sendRequestToDeleteDirector(), title);
+  public void sendMessageDirectorsToDelete(String name) {
+    log.info("Sending a name to delete director :: " + name);
+    sendMessage(directorStream.sendRequestToDeleteDirector(), name);
   }
 
   private <T> void sendMessage(MessageChannel channel, T payload) {

@@ -18,10 +18,4 @@ public class DirectorMessage {
     this.director = director;
     return this;
   }
-
-  public DirectorMessage withDirectorDTO(DirectorDTO directorDTO) {
-    this.directorDTO = directorDTO;
-    return this;
-  }
-
 }

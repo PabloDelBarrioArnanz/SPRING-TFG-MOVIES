@@ -2,6 +2,7 @@ package com.tfg.movies.back.model.dto;
 
 import com.tfg.movies.back.model.entity.Movie;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 
 @Getter
+@ToString
 public class PrizeDTO {
 
   private String name;

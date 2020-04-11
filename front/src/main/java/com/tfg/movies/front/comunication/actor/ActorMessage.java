@@ -18,10 +18,4 @@ public class ActorMessage {
     this.actor = actor;
     return this;
   }
-
-  public ActorMessage withActorDTO(ActorDTO actorDTO) {
-    this.actorDTO = actorDTO;
-    return this;
-  }
-
 }

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ActorRepository extends JpaRepository<Actor, Integer> {
+public interface ActorRepository extends JpaRepository<Actor, String> {
   List<Actor> findAll();
-  List<Actor> findByName(String name);
-  Integer deleteByName(String name);
+  Actor findByName(String name);
+  void delete(Actor actor);
 }

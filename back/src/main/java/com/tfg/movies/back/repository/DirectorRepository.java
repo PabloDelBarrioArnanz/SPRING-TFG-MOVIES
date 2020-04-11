@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DirectorRepository extends JpaRepository<Director, Integer> {
+public interface DirectorRepository extends JpaRepository<Director, String> {
   List<Director> findAll();
-  List<Director> findByName(String name);
-  Integer deleteByName(String name);
+  Director findByName(String name);
+  void delete(Director director);
 }

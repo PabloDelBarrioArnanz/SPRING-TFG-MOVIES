@@ -18,10 +18,4 @@ public class MovieMessage {
     this.movie = movie;
     return this;
   }
-
-  public MovieMessage withMovieDTO(MovieDTO movieDTO) {
-    this.movieDTO = movieDTO;
-    return this;
-  }
-
 }

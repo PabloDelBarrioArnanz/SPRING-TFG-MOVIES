@@ -1,60 +1,54 @@
 package com.tfg.movies.back.service;
 
-import com.tfg.movies.back.comunication.error.MessageErrorSender;
-import com.tfg.movies.back.comunication.movie.MessageMovieSender;
+import com.tfg.movies.back.comunication.error.ErrorMessage;
+import com.tfg.movies.back.comunication.error.ErrorSender;
 import com.tfg.movies.back.comunication.movie.MovieMessage;
+import com.tfg.movies.back.comunication.movie.MovieSender;
 import com.tfg.movies.back.repository.MovieRepository;
 import com.tfg.movies.back.service.mapper.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
+
+import static com.tfg.movies.back.service.Util.peek;
 
 @Service
 public class MovieService {
 
   @Autowired private MovieRepository movieRepository;
   @Autowired private MovieMapper movieMapper;
-  @Autowired private MessageMovieSender messageMovieSender;
-  @Autowired private MessageErrorSender messageErrorSender;
+  @Autowired private MovieSender movieSender;
+  @Autowired private ErrorSender errorSender;
 
   public void saveMovie(MovieMessage movieMessage) {
-    Optional.of(movieMessage)
+    Optional.ofNullable(movieMessage)
       .map(movieMapper::toMovie)
       .map(movie -> movieRepository.save(movie))
       .map(movieMapper::toMessage)
-      .ifPresent(messageToSend -> messageMovieSender.sendMessageMovieSaved(messageToSend));
+      .map(messageToSend -> movieSender.sendMessageMovieSaved(messageToSend))
+      .orElseGet(() -> errorSender.sendMessageError(new ErrorMessage().withError("Impossible to save this movie")));
   }
 
-  public void readMoviesByTitle(String title) {
-    movieRepository.findByTitle(title)
-      .parallelStream()
+  public void readMovieByTitle(String title) {
+    Optional.ofNullable(title)
+      .flatMap(movieRepository::findByTitle)
       .map(movieMapper::toMessage)
-      .forEach(message -> messageMovieSender.sendMessageMoviesRead(message));
+      .map(message -> movieSender.sendMessageMovieRead(message))
+      .orElseGet(() -> errorSender.sendMessageError(new ErrorMessage().withError("Movie doesn't exist")));
   }
 
   public void readAllMovies() {
     movieRepository.findAll()
       .parallelStream()
       .map(movieMapper::toMessage)
-      .forEach(message -> messageMovieSender.sendMessageMoviesRead(message));
+      .forEach(message -> movieSender.sendMessageMovieRead(message));
   }
 
   public void deleteMovieByTitle(String title) {
-    Optional.of(title)
-      .map(movieRepository::findByTitle)
-      .map(l -> l.get(0))
-      .map(peek(movieRepository::delete))
-      .map(id -> messageMovieSender.sendMessageMovieDeleted(Boolean.TRUE))
-      .orElseGet(() -> messageErrorSender.sendMessageError("Imposible to delete this movie"));
-  }
-
-  private <T> UnaryOperator<T> peek(Consumer<T> c) {
-    return x -> {
-      c.accept(x);
-      return x;
-    };
+    Optional.ofNullable(title)
+      .map(peek(movieRepository::deleteById))
+      .map(id -> movieSender.sendMessageMovieDeleted(Boolean.TRUE))
+      .orElseGet(() -> errorSender.sendMessageError(new ErrorMessage().withError("Impossible to delete this movie")));
   }
 }

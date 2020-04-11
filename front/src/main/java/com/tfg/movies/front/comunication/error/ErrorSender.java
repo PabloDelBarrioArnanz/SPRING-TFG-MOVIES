@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class MessageErrorSender {
+public class ErrorSender {
 
-  @Autowired private MessageErrorStream messageErrorStream;
+  @Autowired private ErrorStream errorStream;
 
   public void sendMessageError(String error) {
     log.info("Sending an error" + error);
-    sendMessage(messageErrorStream.sendError(), error);
+    sendMessage(errorStream.sendError(), error);
   }
 
   private <T> void sendMessage(MessageChannel channel, T payload) {
