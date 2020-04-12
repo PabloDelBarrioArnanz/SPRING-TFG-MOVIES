@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 @Component
 public class PrizeMapper {
 
-  public Set<PrizeDTO> toPrizeDTO(Set<Prize> prizes) {
+  public Set<PrizeDTO> toMoviePrizeDTO(Set<Prize> prizes) {
     return prizes.stream()
-      .map(this::toPrizeDTO)
+      .map(this::toMoviePrizeDTO)
       .collect(Collectors.toSet());
   }
 
-  public PrizeDTO toPrizeDTO(Prize prize) {
+  public PrizeDTO toMoviePrizeDTO(Prize prize) {
     return new PrizeDTO()
       .setName(prize.getName())
       .setConcessionDate(prize.getConcessionDate());

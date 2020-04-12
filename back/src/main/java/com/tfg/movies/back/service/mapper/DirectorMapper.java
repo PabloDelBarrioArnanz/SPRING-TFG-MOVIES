@@ -3,6 +3,7 @@ package com.tfg.movies.back.service.mapper;
 import com.tfg.movies.back.comunication.director.DirectorMessage;
 import com.tfg.movies.back.model.dto.DirectorDTO;
 import com.tfg.movies.back.model.entity.Director;
+import com.tfg.movies.back.model.entity.Movie;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -15,14 +16,17 @@ public class DirectorMapper {
     return new DirectorMessage()
       .withDirectorDTO(toDirectorDTO(director));
   }
-  
-  public Set<DirectorDTO> toDirectorDTO(Set<Director> directors) {
-    return directors.stream()
-      .map(this::toDirectorDTO)
-      .collect(Collectors.toSet());
-  }
 
   public DirectorDTO toDirectorDTO(Director director) {
+    return new DirectorDTO()
+      .setAge(director.getAge())
+      .setName(director.getName())
+      .setMovies(director.getMovies().stream()
+        .map(Movie::getTitle)
+        .collect(Collectors.toSet()));
+  }
+
+  public DirectorDTO toMovieDirectorDTO(Director director) {
     return new DirectorDTO()
       .setAge(director.getAge())
       .setName(director.getName());
@@ -30,5 +34,11 @@ public class DirectorMapper {
 
   public Director toDirector(DirectorMessage directorMessage) {
     return directorMessage.getDirector();
+  }
+
+  public Set<DirectorDTO> toMovieDirectorDTO(Set<Director> directors) {
+    return directors.stream()
+      .map(this::toMovieDirectorDTO)
+      .collect(Collectors.toSet());
   }
 }

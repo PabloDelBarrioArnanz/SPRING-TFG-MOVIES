@@ -1,6 +1,5 @@
 package com.tfg.movies.back.model.dto;
 
-import com.tfg.movies.back.model.entity.Movie;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -15,7 +14,7 @@ public class PrizeDTO {
 
   private String name;
   private LocalDate concessionDate;
-  private Set<Movie> movies = new HashSet<>();
+  private Set<String> movies = new HashSet<>();
 
   public PrizeDTO setName(String name) {
     this.name = name;
@@ -27,7 +26,7 @@ public class PrizeDTO {
     return this;
   }
 
-  public PrizeDTO setMovies(Set<Movie> movies) {
+  public PrizeDTO setMovies(Set<String> movies) {
     this.movies = movies;
     return this;
   }

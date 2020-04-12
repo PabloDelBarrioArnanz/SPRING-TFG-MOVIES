@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class MovieMessage {
 
   private Movie movie;

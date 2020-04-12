@@ -11,7 +11,7 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 @Component
 public class ErrorReceptor {
 
-  @StreamListener(ErrorStream.ERROR_RESPONSE)
+  @StreamListener(ErrorStream.ERROR_REQUEST)
   public void savedActor(@Payload ErrorMessage errorMessage) {
     runAsync(() -> log.error(errorMessage.getError()));
   }

@@ -13,16 +13,16 @@ public class MovieReceptor {
 
   @StreamListener(MovieStream.SAVE_MOVIE_RESPONSE)
   public void savedMovie(@Payload MovieMessage movieMessage) {
-    runAsync(() -> log.info("Movie save response :: " + movieMessage.getMovieDTO()));
+    runAsync(() -> log.info("Movie save response :: \n" + movieMessage.getMovieDTO()));
   }
 
   @StreamListener(MovieStream.DELETE_MOVIE_RESPONSE)
   public void deletedMovie(@Payload Boolean status) {
-    runAsync(() -> log.info("Movie deleted response :: " + status));
+    runAsync(() -> log.info("Movie deleted response :: \n" + status));
   }
 
   @StreamListener(MovieStream.READ_MOVIE_RESPONSE)
   public void receivedActor(@Payload MovieMessage movieMessage) {
-    runAsync(() -> log.info("Movie read request info :: " + movieMessage.getMovieDTO()));
+    runAsync(() -> log.info("Movie read response info :: \n" + movieMessage.getMovieDTO()));
   }
 }

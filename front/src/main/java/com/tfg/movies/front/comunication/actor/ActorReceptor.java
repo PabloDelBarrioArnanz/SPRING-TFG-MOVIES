@@ -13,16 +13,16 @@ public class ActorReceptor {
 
   @StreamListener(ActorStream.SAVE_ACTOR_RESPONSE)
   public void savedActor(@Payload ActorMessage actorMessage) {
-    runAsync(() -> log.info("Actor save response :: " + actorMessage.getActorDTO()));
+    runAsync(() -> log.info("Actor save response :: \n" + actorMessage.getActorDTO()));
   }
 
   @StreamListener(ActorStream.DELETE_ACTOR_RESPONSE)
   public void deletedActor(@Payload Boolean status) {
-    runAsync(() -> log.info("Actor deleted response :: " + status));
+    runAsync(() -> log.info("Actor deleted response :: \n" + status));
   }
 
   @StreamListener(ActorStream.READ_ACTOR_RESPONSE)
   public void receivedActor(@Payload ActorMessage actorMessage) {
-    runAsync(() -> log.info("Movie read request info :: " + actorMessage.getActorDTO()));
+    runAsync(() -> log.info("Movie read request info :: \n" + actorMessage.getActorDTO()));
   }
 }

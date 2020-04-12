@@ -1,6 +1,5 @@
 package com.tfg.movies.back.model.dto;
 
-import com.tfg.movies.back.model.entity.Movie;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -13,7 +12,7 @@ public class DirectorDTO {
 
   private String name;
   private Integer age;
-  private Set<Movie> movies = new HashSet<>();
+  private Set<String> movies = new HashSet<>();
 
   public DirectorDTO setName(String name) {
     this.name = name;
@@ -25,7 +24,7 @@ public class DirectorDTO {
     return this;
   }
 
-  public DirectorDTO setMovies(Set<Movie> movies) {
+  public DirectorDTO setMovies(Set<String> movies) {
     this.movies = movies;
     return this;
   }

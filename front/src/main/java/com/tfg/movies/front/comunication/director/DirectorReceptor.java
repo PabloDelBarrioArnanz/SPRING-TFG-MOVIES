@@ -13,16 +13,16 @@ public class DirectorReceptor {
 
   @StreamListener(DirectorStream.SAVE_DIRECTOR_RESPONSE)
   public void savedActor(@Payload DirectorMessage directorMessage) {
-    runAsync(() -> log.info("Director save response :: "  + directorMessage.getDirectorDTO()));
+    runAsync(() -> log.info("Director save response :: \n"  + directorMessage.getDirectorDTO()));
   }
 
   @StreamListener(DirectorStream.DELETE_DIRECTOR_RESPONSE)
   public void deletedActor(@Payload Boolean status) {
-    runAsync(() -> log.info("Director deleted response :: " + status));
+    runAsync(() -> log.info("Director deleted response :: \n" + status));
   }
 
   @StreamListener(DirectorStream.READ_DIRECTOR_RESPONSE)
   public void receivedActor(@Payload DirectorMessage directorMessage) {
-    runAsync(() -> log.info("Director read request info :: " + directorMessage.getDirectorDTO()));
+    runAsync(() -> log.info("Director read request info :: \n" + directorMessage.getDirectorDTO()));
   }
 }
