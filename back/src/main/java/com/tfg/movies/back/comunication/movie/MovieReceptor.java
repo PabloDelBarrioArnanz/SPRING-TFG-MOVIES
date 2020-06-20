@@ -28,9 +28,9 @@ public class MovieReceptor {
   }
 
   @StreamListener(MovieStream.READ_ALL_MOVIES_REQUEST)
-  public void moviesToRead() {
+  public void moviesToRead(@Payload Boolean order) {
     runAsync(() -> log.info("Received a request to read :: all movies"))
-      .thenRunAsync(() -> movieService.readAllMovies());
+      .thenRunAsync(() -> movieService.readAllMovies(order));
   }
 
   @StreamListener(MovieStream.DELETE_MOVIE_REQUEST)
@@ -38,5 +38,4 @@ public class MovieReceptor {
     runAsync(() -> log.info("Received a title to delete a movie :: " + title))
       .thenRunAsync(() -> movieService.deleteMovieByTitle(title));
   }
-
 }

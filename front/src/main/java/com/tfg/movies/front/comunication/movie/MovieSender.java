@@ -30,9 +30,9 @@ public class MovieSender {
     sendMessage(movieStream.sendRequestToReadMovie(), title);
   }
 
-  public void sendMessageMoviesToRead() {
+  public void sendMessageMoviesToRead(Boolean sort) {
     log.info("Sending a request to read :: all movies");
-    sendMessage(movieStream.sendRequestToSaveAllMovies(), "");
+    sendMessage(movieStream.sendRequestToSaveAllMovies(), sort);
   }
 
   public void sendMessageMoviesToDelete(String title) {

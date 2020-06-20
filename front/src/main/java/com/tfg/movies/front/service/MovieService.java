@@ -20,12 +20,11 @@ public class MovieService {
     movieSender.sendMessageMovieToRead(title);
   }
 
-  public void getMovies() {
-    movieSender.sendMessageMoviesToRead();
+  public void getMovies(Boolean sort) {
+    movieSender.sendMessageMoviesToRead(sort);
   }
 
   public void deleteMovie(@NotEmpty String title) {
     movieSender.sendMessageMoviesToDelete(title);
   }
-
 }
