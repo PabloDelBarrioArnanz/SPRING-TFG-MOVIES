@@ -27,6 +27,8 @@ public class MovieDTO {
   private double score;
   private Set<PrizeDTO> prizes = new HashSet<>();
   private Set<ReviewDTO> reviews = new HashSet<>();
+  private double vote;
+  private double totalVotes;
 
   @Override
   public String toString() {
@@ -38,6 +40,7 @@ public class MovieDTO {
         + "\t-Genero: " + gender + "\n"
         + "\t-Synopsis: " + synopsis + "\n"
         + "\t-Valoracion: " + score + "\n"
+        + "\t-Total de valoraciones: " + totalVotes + "\n"
         + "\t-Fecha de estreno: " + premiereDate + "\n"
         + "\t-Dirigida por: " + "\n"
         + "\t\t" + directors.stream().map(DirectorDTO::toString).collect(Collectors.joining("\n\t\t")) + "\n"

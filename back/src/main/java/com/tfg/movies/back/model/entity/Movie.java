@@ -51,6 +51,10 @@ public class Movie {
 
   private double score;
 
+  private double vote;
+
+  private double totalVotes;
+
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(
     name = "Movie_Prize",
@@ -67,4 +71,13 @@ public class Movie {
   )
   private Set<Review> reviews = new HashSet<>();
 
+  public Movie setScore(double score) {
+    this.score = score;
+    return this;
+  }
+
+  public Movie setTotalVotes(double totalVotes) {
+    this.totalVotes = totalVotes;
+    return this;
+  }
 }

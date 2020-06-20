@@ -10,11 +10,13 @@ public interface MovieStream {
   String SAVE_MOVIE_RESPONSE = "SAVE_MOVIE_RESPONSE";
   String DELETE_MOVIE_RESPONSE = "DELETE_MOVIE_RESPONSE";
   String READ_MOVIE_RESPONSE = "READ_MOVIE_RESPONSE";
+  String VOTE_MOVIE_RESPONSE = "VOTE_MOVIE_RESPONSE";
 
   String SAVE_MOVIE_REQUEST = "SAVE_MOVIE_REQUEST";
   String DELETE_MOVIE_REQUEST = "DELETE_MOVIE_REQUEST";
   String READ_MOVIE_REQUEST = "READ_MOVIE_REQUEST";
   String READ_ALL_MOVIES_REQUEST = "READ_ALL_MOVIES_REQUEST";
+  String VOTE_MOVIE_REQUEST = "VOTE_MOVIE_REQUEST";
 
 
   @Output(SAVE_MOVIE_RESPONSE)
@@ -25,6 +27,9 @@ public interface MovieStream {
 
   @Output(READ_MOVIE_RESPONSE)
   SubscribableChannel sendReadMovieResponse();
+
+  @Output(VOTE_MOVIE_RESPONSE)
+  SubscribableChannel sendVotedMovieResponse();
 
   @Input(SAVE_MOVIE_REQUEST)
   MessageChannel getSaveMovieRequest();
@@ -37,5 +42,8 @@ public interface MovieStream {
 
   @Input(READ_ALL_MOVIES_REQUEST)
   MessageChannel getReadAllMoviesRequest();
+
+  @Input(VOTE_MOVIE_REQUEST)
+  MessageChannel voteMovieRequest();
 
 }

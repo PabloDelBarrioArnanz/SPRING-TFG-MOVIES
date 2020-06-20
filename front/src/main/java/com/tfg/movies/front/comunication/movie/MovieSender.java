@@ -40,6 +40,13 @@ public class MovieSender {
     sendMessage(movieStream.sendRequestToDeleteMovie(), title);
   }
 
+  public void sendMessageMoviesToVote(Movie movieToVote) {
+    log.info("Sending a title to vote movie :: " + movieToVote.getTitle() + " -> " + movieToVote.getVote());
+    Optional.of(movieToVote)
+      .map(mov -> movieMapper.toMovieMessage(mov))
+      .ifPresent(message -> sendMessage(movieStream.sendRequestToVoteMovie(), message));
+  }
+
   private <T> void sendMessage(MessageChannel channel, T payload) {
     channel
       .send(MessageBuilder

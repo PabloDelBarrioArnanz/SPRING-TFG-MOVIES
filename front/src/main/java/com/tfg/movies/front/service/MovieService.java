@@ -27,4 +27,8 @@ public class MovieService {
   public void deleteMovie(@NotEmpty String title) {
     movieSender.sendMessageMoviesToDelete(title);
   }
+
+  public void voteMovie(Movie movieToVote) {
+    movieSender.sendMessageMoviesToVote(movieToVote);
+  }
 }

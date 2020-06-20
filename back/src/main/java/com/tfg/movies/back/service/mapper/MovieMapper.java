@@ -28,6 +28,8 @@ public class MovieMapper {
       .setSynopsis(movie.getSynopsis())
       .setPremiereDate(movie.getPremiereDate())
       .setScore(movie.getScore())
+      .setVote(movie.getVote())
+      .setTotalVotes(movie.getTotalVotes())
       .setDirectors(directorMapper.toMovieDirectorDTO(movie.getDirectors()))
       .setActors(actorMapper.toMovieActorDTO(movie.getActors()))
       .setPrizes(prizeMapper.toMoviePrizeDTO(movie.getPrizes()))

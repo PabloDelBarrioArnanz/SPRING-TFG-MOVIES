@@ -31,6 +31,7 @@ public class MovieService {
   private static final String SAVE_ERROR = "Impossible to save this movie";
   private static final String MOVIE_NOT_FOUND = "Movie doesn't exist";
   private static final String MOVIE_NOT_DELETED = "Impossible to delete this movie";
+  private static final String MOVIE_NOT_VOTED = "Impossible to vote this movie";
 
   public void saveMovie(MovieMessage movieMessage) {
     applyOperation(movieMessage, movieMapper::toMovie, (movie) -> Optional.of(movieRepository.save(movie)), movieMapper::toMessage, movieSender::sendMessageMovieSaved, SAVE_ERROR);
@@ -54,6 +55,18 @@ public class MovieService {
       .map(peek(movieRepository::deleteById))
       .map(id -> movieSender.sendMessageMovieDeleted(Boolean.TRUE))
       .orElseGet(() -> errorSender.sendMessageError(new ErrorMessage(MOVIE_NOT_DELETED)));
+  }
+
+  public void voteMovieByTitle(MovieMessage movieMessage) {
+    Function<Movie, String> updateScoreMovie = movie -> Optional.of(movie)
+      .map(mov -> mov.getScore() + ((mov.getVote() - mov.getScore()) / (mov.getTotalVotes() + 1)))
+      .map(movie::setScore)
+      .map(mov -> mov.setTotalVotes(mov.getTotalVotes() + 1))
+      .map(movieRepository::save)
+      .map(mov -> "New score " + mov.getScore() + " for movie " + mov.getTitle())
+      .orElse(MOVIE_NOT_VOTED);
+
+    applyOperation(movieMessage, movieMapper::toMovie, movie -> movieRepository.findByTitle(movie.getTitle()), updateScoreMovie, movieSender::sendMessageMovieVoted, MOVIE_NOT_VOTED);
   }
 
   private <T, E, W, S> void applyOperation(T payload, Function<T, E> reader, Function<E, Optional<W>> repositoryOperation, Function<W, S> mapper, Function<S, Boolean> sender, String reason) {

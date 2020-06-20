@@ -27,6 +27,11 @@ public class MovieSender {
     return sendMessage(movieStream.sendDeleteMovieResponse(), result);
   }
 
+  public boolean sendMessageMovieVoted(String movieAndResult) {
+    log.info("Sending voted movie response :: " + movieAndResult);
+    return sendMessage(movieStream.sendVotedMovieResponse(), movieAndResult);
+  }
+
   public <T> boolean sendMessage(MessageChannel channel, T payload) {
     return channel.send(MessageBuilder
       .withPayload(payload)

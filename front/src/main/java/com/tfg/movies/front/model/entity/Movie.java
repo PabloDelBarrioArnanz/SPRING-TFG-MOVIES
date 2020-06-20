@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -21,9 +23,6 @@ import java.util.List;
 public class Movie {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
-
   @NotEmpty
   private String title;
 
@@ -62,6 +61,12 @@ public class Movie {
 
   @ElementCollection
   private List<Review> reviews;
+
+  @Min(0)
+  @Max(100)
+  private double vote;
+
+  private double totalVotes;
 
   public Movie setTitle(String title) {
     this.title = title;

@@ -25,4 +25,9 @@ public class MovieReceptor {
   public void receivedActor(@Payload MovieMessage movieMessage) {
     runAsync(() -> log.info("Movie read response info :: \n" + movieMessage.getMovieDTO()));
   }
+
+  @StreamListener(MovieStream.VOTE_MOVIE_RESPONSE)
+  public void receivedVote(@Payload String payload) {
+    runAsync(() -> log.info(payload));
+  }
 }

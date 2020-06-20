@@ -21,6 +21,8 @@ public class MovieDTO {
   private Set<DirectorDTO> directors = new HashSet<>();
   private Set<ActorDTO> actors = new HashSet<>();
   private double score;
+  private double vote;
+  private double totalVotes;
   private Set<PrizeDTO> prizes = new HashSet<>();
   private Set<ReviewDTO> reviews = new HashSet<>();
 
@@ -71,6 +73,24 @@ public class MovieDTO {
 
   public MovieDTO setScore(double score) {
     this.score = score;
+    return this;
+  }
+
+  public double getVote() {
+    return vote;
+  }
+
+  public MovieDTO setVote(double vote) {
+    this.vote = vote;
+    return this;
+  }
+
+  public double getTotalVotes() {
+    return totalVotes;
+  }
+
+  public MovieDTO setTotalVotes(double totalVotes) {
+    this.totalVotes = totalVotes;
     return this;
   }
 

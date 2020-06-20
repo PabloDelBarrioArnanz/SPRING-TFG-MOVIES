@@ -38,4 +38,10 @@ public class MovieReceptor {
     runAsync(() -> log.info("Received a title to delete a movie :: " + title))
       .thenRunAsync(() -> movieService.deleteMovieByTitle(title));
   }
+
+  @StreamListener(MovieStream.VOTE_MOVIE_REQUEST)
+  public void movieToDelete(@Payload MovieMessage movieMessage) {
+    runAsync(() -> log.info("Received a vote for movie :: " + movieMessage.getMovie().getTitle() + " " + movieMessage.getMovie().getVote()))
+      .thenRunAsync(() -> movieService.voteMovieByTitle(movieMessage));
+  }
 }
