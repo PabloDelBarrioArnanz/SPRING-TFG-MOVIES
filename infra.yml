@@ -40,3 +40,19 @@ services:
     image: eureka_server
     ports:
         - "8080:8080"
+  front_micro:
+    container_name: front_micro
+    build:
+      context: front
+      dockerfile: Dockerfile
+    image: front_micro
+    ports:
+      - "8082:8082"
+  back_micro:
+    container_name: back_micro
+    build:
+      context: back
+      dockerfile: Dockerfile
+    image: back_micro
+    ports:
+      - "8081:8081"
