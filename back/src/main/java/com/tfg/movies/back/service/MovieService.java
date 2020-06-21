@@ -45,7 +45,9 @@ public class MovieService {
     movieRepository.findAll()
       .stream()
       .sorted(sort.equals(Boolean.TRUE) ?
-        Comparator.comparing(Movie::getScore) : Comparator.comparing(Movie::getTitle))
+        Comparator.comparingDouble(Movie::getScore)
+          .thenComparing(Movie::getTitle) :
+        Comparator.comparing(Movie::getTitle))
       .map(movieMapper::toMessage)
       .forEach(message -> movieSender.sendMessageMovieRead(message));
   }

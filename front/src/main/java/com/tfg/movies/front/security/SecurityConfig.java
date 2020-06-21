@@ -14,8 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http
-      .authorizeRequests()
+    http.authorizeRequests()
       .requestMatchers(req -> req.getRequestURI().contains("no-restricted"))
       .hasAnyRole("ADMIN", "USER")
       .requestMatchers(req -> req.getRequestURI().contains("restricted"))
