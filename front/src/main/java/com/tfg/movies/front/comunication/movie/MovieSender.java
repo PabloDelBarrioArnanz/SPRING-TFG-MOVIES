@@ -2,8 +2,8 @@ package com.tfg.movies.front.comunication.movie;
 
 import com.tfg.movies.front.model.entity.Movie;
 import com.tfg.movies.front.service.mapper.MovieMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
@@ -13,10 +13,11 @@ import java.util.Optional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class MovieSender {
 
-  @Autowired private MovieStream movieStream;
-  @Autowired private MovieMapper movieMapper;
+  private final MovieStream movieStream;
+  private final MovieMapper movieMapper;
 
   public void sendMessageMovieToSave(@Validated MovieMessage movieMessage) {
     log.info("Sending a movie for save :: " + movieMessage.getMovie());
