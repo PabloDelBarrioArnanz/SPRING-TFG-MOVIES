@@ -18,10 +18,9 @@ public class MovieSender {
   @Autowired private MovieStream movieStream;
   @Autowired private MovieMapper movieMapper;
 
-  public void sendMessageMovieToSave(@Validated Movie movie) {
-    log.info("Sending a movie for save :: " + movie);
-    Optional.of(movie)
-      .map(mov -> movieMapper.toMovieMessage(mov))
+  public void sendMessageMovieToSave(@Validated MovieMessage movieMessage) {
+    log.info("Sending a movie for save :: " + movieMessage.getMovie());
+    Optional.of(movieMessage)
       .ifPresent(message -> sendMessage(movieStream.sendRequestToSaveMovie(), message));
   }
 
