@@ -40,7 +40,7 @@ public class MovieReceptor {
   }
 
   @StreamListener(MovieStream.VOTE_MOVIE_REQUEST)
-  public void movieToDelete(@Payload MovieMessage movieMessage) {
+  public void movieToVote(@Payload MovieMessage movieMessage) {
     runAsync(() -> log.info("Received a vote for movie :: " + movieMessage.getMovie().getTitle() + " " + movieMessage.getMovie().getVote()))
       .thenRunAsync(() -> movieService.voteMovieByTitle(movieMessage));
   }

@@ -32,7 +32,6 @@ public interface MovieStream {
   SubscribableChannel getResponseFromVotedMovie();
 
 
-
   @Output(SAVE_MOVIE_REQUEST)
   MessageChannel sendRequestToSaveMovie();
 

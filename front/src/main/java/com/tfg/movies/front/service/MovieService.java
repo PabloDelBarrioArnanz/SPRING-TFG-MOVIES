@@ -35,6 +35,8 @@ public class MovieService {
   }
 
   public void voteMovie(Movie movieToVote) {
-    movieSender.sendMessageMoviesToVote(movieToVote);
+    Optional.of(movieToVote)
+      .map(movieMapper::toMovieMessage)
+      .ifPresent(movieSender::sendMessageMoviesToVote);
   }
 }

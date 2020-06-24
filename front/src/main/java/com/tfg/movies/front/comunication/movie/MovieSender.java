@@ -1,13 +1,10 @@
 package com.tfg.movies.front.comunication.movie;
 
-import com.tfg.movies.front.model.entity.Movie;
-import com.tfg.movies.front.service.mapper.MovieMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Optional;
 
@@ -17,9 +14,8 @@ import java.util.Optional;
 public class MovieSender {
 
   private final MovieStream movieStream;
-  private final MovieMapper movieMapper;
 
-  public void sendMessageMovieToSave(@Validated MovieMessage movieMessage) {
+  public void sendMessageMovieToSave(MovieMessage movieMessage) {
     log.info("Sending a movie for save :: " + movieMessage.getMovie());
     Optional.of(movieMessage)
       .ifPresent(message -> sendMessage(movieStream.sendRequestToSaveMovie(), message));
@@ -40,10 +36,9 @@ public class MovieSender {
     sendMessage(movieStream.sendRequestToDeleteMovie(), title);
   }
 
-  public void sendMessageMoviesToVote(Movie movieToVote) {
-    log.info("Sending a title to vote movie :: " + movieToVote.getTitle() + " -> " + movieToVote.getVote());
-    Optional.of(movieToVote)
-      .map(mov -> movieMapper.toMovieMessage(mov))
+  public void sendMessageMoviesToVote(MovieMessage movieMessage) {
+    log.info("Sending a title to vote movie :: " + movieMessage.getMovie().getTitle() + " -> " + movieMessage.getMovie().getVote());
+    Optional.of(movieMessage)
       .ifPresent(message -> sendMessage(movieStream.sendRequestToVoteMovie(), message));
   }
 
