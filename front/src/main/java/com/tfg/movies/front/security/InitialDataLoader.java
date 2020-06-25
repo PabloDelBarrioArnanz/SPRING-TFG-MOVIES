@@ -4,7 +4,7 @@ import com.tfg.movies.front.model.entity.Role;
 import com.tfg.movies.front.model.entity.User;
 import com.tfg.movies.front.repository.RoleRepository;
 import com.tfg.movies.front.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,18 +15,13 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
   private boolean alreadySetup = false;
-
-  @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
-  private RoleRepository roleRepository;
-
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final RoleRepository roleRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   @Transactional
