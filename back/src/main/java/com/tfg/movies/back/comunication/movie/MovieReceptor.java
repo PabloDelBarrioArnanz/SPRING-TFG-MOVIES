@@ -1,8 +1,8 @@
 package com.tfg.movies.back.comunication.movie;
 
 import com.tfg.movies.back.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -11,9 +11,10 @@ import static java.util.concurrent.CompletableFuture.runAsync;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class MovieReceptor {
 
-  @Autowired private MovieService movieService;
+  private final MovieService movieService;
 
   @StreamListener(MovieStream.SAVE_MOVIE_REQUEST)
   public void movieToSave(@Payload MovieMessage movieMessage) {

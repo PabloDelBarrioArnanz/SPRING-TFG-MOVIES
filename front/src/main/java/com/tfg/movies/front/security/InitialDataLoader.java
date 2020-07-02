@@ -73,5 +73,4 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
       .build();
     userRepository.save(userAdmin);
   }
-
 }
