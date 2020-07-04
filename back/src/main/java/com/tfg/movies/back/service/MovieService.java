@@ -7,7 +7,7 @@ import com.tfg.movies.back.comunication.movie.MovieSender;
 import com.tfg.movies.back.model.entity.Movie;
 import com.tfg.movies.back.repository.MovieRepository;
 import com.tfg.movies.back.service.mapper.MovieMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -17,16 +17,13 @@ import java.util.function.Function;
 import static com.tfg.movies.back.service.Util.peek;
 
 @Service
+@AllArgsConstructor
 public class MovieService {
 
-  @Autowired
-  private MovieRepository movieRepository;
-  @Autowired
-  private MovieMapper movieMapper;
-  @Autowired
-  private MovieSender movieSender;
-  @Autowired
-  private ErrorSender errorSender;
+  private final MovieRepository movieRepository;
+  private final MovieMapper movieMapper;
+  private final MovieSender movieSender;
+  private final ErrorSender errorSender;
 
   private static final String SAVE_ERROR = "Impossible to save this movie";
   private static final String MOVIE_NOT_FOUND = "Movie doesn't exist";
@@ -49,7 +46,7 @@ public class MovieService {
           .thenComparing(Movie::getTitle) :
         Comparator.comparing(Movie::getTitle))
       .map(movieMapper::toMessage)
-      .forEach(message -> movieSender.sendMessageMovieRead(message));
+      .forEach(movieSender::sendMessageMovieRead);
   }
 
   public void deleteMovieByTitle(String title) {
